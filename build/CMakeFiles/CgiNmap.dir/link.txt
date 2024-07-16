@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wall -g CMakeFiles/CgiNmap.dir/root/cgi/CgiNmap.cpp.o -o ../out/CgiNmap 

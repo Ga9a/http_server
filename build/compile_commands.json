@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/agni/Desktop/MyChat/build",
+  "command": "/usr/bin/c++ -DSOURCE_ROOT=\\\"/home/agni/Desktop/MyChat\\\"  -Wall -g -std=gnu++11 -o CMakeFiles/MyChat.dir/src/main.cpp.o -c /home/agni/Desktop/MyChat/src/main.cpp",
+  "file": "/home/agni/Desktop/MyChat/src/main.cpp"
+},
+{
+  "directory": "/home/agni/Desktop/MyChat/build",
+  "command": "/usr/bin/c++ -DSOURCE_ROOT=\\\"/home/agni/Desktop/MyChat\\\"  -Wall -g -std=gnu++11 -o CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o -c /home/agni/Desktop/MyChat/root/cgi/CgiTool.cpp",
+  "file": "/home/agni/Desktop/MyChat/root/cgi/CgiTool.cpp"
+},
+{
+  "directory": "/home/agni/Desktop/MyChat/build",
+  "command": "/usr/bin/c++ -DSOURCE_ROOT=\\\"/home/agni/Desktop/MyChat\\\"  -Wall -g -I/usr/include/mysql -std=gnu++11 -o CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o -c /home/agni/Desktop/MyChat/root/cgi/CgiMySQL.cpp",
+  "file": "/home/agni/Desktop/MyChat/root/cgi/CgiMySQL.cpp"
+}
+]

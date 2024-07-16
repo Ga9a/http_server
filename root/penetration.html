@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Penetration Testing Tools</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2C3E50;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            height: flex;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: rgb(49, 69, 89);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px; /* Add margin between containers */
+        }
+        .header, .description, .form-container, .output-container {
+            background-color: #525d74;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px; /* Add margin between sections */
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-align: center;
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+        .description {
+            flex: 1;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-right: 20px;
+        }
+        .form-container {
+            flex: 1;
+            text-align: left;
+        }
+        .form-group {
+            margin: 20px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        .form-group input, .form-group select {
+            width: 87%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #2C3E50;
+            color: #fff;
+        }
+        .btn {
+            background: #3498DB;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #2980B9;
+        }
+        .output-container {
+            height: 200px; /* Set a fixed height for the output container */
+            overflow-y: auto; /* Add scroll bar when content overflows */
+        }
+        .output {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border: 1px solid #2980B9;
+            border-radius: 5px;
+            color: #fff;
+            text-align: left;
+            height: 100%;
+            overflow-y: auto;
+        }
+        a {
+            color: #3498DB;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        // Define texts in English and Chinese
+        var texts = {
+            'en': {
+                'headerText': 'Penetration Testing Tools Interface',
+                'description1': 'Welcome to the penetration testing tool interface. This tool is designed to help you conduct network security testing, identify potential vulnerabilities and weaknesses in the system.',
+                'description2': 'Usage steps:',
+                'description3': 'Select the tool you want to use from the drop-down menu.',
+                'description4': 'Enter the target IP address.',
+                'description5': 'Enter the target port.',
+                'description6': 'Click the "Send Request" button to start testing.',
+                'description7': 'The scan results will be displayed at the bottom of the page, and you can also save the report as a TXT file.',
+                'tools': 'Select a tool',
+                'ips': 'IP address',
+                'ports': 'Port',
+                'clear': 'Clear tool list',
+                'send': 'Send request',
+                'add': 'Universal call addition',
+                'output': 'Output'
+                // Add other texts...
+            },
+            'zh': {
+                'headerText': '渗透测试工具界面',
+                'description1': '欢迎使用渗透测试工具界面。这个工具旨在帮助您进行网络安全测试，识别系统中的潜在漏洞和弱点。',
+                'description2': '使用步骤：',
+                'description3': '从下拉菜单中选择您希望使用的工具。',
+                'description4': '输入目标IP地址。',
+                'description5': '输入目标端口。',
+                'description6': '点击"发送请求"按钮以开始测试。',
+                'description7': '扫描结果将显示在页面下方，您还可以将报告保存为TXT文件。',
+                'tools': '选择工具',
+                'ips': 'IP地址',
+                'ports': '端口',
+                'clear': '清空工具列表',
+                'send': '发送请求',
+                'add': '通用调用添加',
+                'output': '输出'
+                // Add other texts...
+            }
+        };
+
+        var currentLanguage = 'en'; // Default language
+
+        // Function to switch language
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            var header = document.getElementById('headerText');
+            var description1 = document.getElementById('descriptionText1');
+            var description2 = document.getElementById('descriptionText2');
+            var description3 = document.getElementById('descriptionText3');
+            var description4 = document.getElementById('descriptionText4');
+            var description5 = document.getElementById('descriptionText5');
+            var description6 = document.getElementById('descriptionText6');
+            var description7 = document.getElementById('descriptionText7');
+            var tools = document.getElementById('toolText');
+            var ips = document.getElementById('ipText');
+            var ports = document.getElementById('portText');
+            var clear = document.getElementById('clearText');
+            var send = document.getElementById('sendText');
+            var add = document.getElementById('addText');
+            var output = document.getElementById('outputText');
+            // Update texts on the page according to the current language
+            header.textContent = texts[currentLanguage].headerText;
+            description1.textContent = texts[currentLanguage].description1;
+            description2.textContent = texts[currentLanguage].description2;
+            description3.textContent = texts[currentLanguage].description3;
+            description4.textContent = texts[currentLanguage].description4;
+            description5.textContent = texts[currentLanguage].description5;
+            description6.textContent = texts[currentLanguage].description6;
+            description7.textContent = texts[currentLanguage].description7;
+            tools.textContent = texts[currentLanguage].tools;
+            ips.textContent = texts[currentLanguage].ips;
+            ports.textContent = texts[currentLanguage].ports;
+            clear.textContent = texts[currentLanguage].clear;
+            send.textContent = texts[currentLanguage].send;
+            add.textContent = texts[currentLanguage].add;
+            output.textContent = texts[currentLanguage].output;
+
+            // Update placeholder text based on language
+            var ipInput = document.getElementById('ip');
+            var portInput = document.getElementById('port');
+            if (currentLanguage === 'en') {
+                ipInput.placeholder = 'e.g., 192.168.1.1';
+                portInput.placeholder = 'e.g., 80';
+            } else if (currentLanguage === 'zh') {
+                ipInput.placeholder = '例如：192.168.1.1';
+                portInput.placeholder = '例如：80';
+            }
+        }
+
+        // Set language when the page loads
+        function setupLanguage() {
+            switchLanguage(currentLanguage);
+        }
+
+        // Function to clear tools list
+        function clearTools() {
+            localStorage.removeItem('tools');
+            switchLanguage(currentLanguage); // Reload language after clearing
+            location.reload(); // Reload page to refresh tools list
+        }
+
+        // Function to load tools from localStorage
+        function loadTools() {
+            const toolSelect = document.getElementById('tool');
+            const tools = JSON.parse(localStorage.getItem('tools')) || [];
+
+            tools.forEach(tool => {
+                const option = document.createElement('option');
+                option.value = tool;
+                option.textContent = tool;
+                toolSelect.appendChild(option);
+            });
+        }
+
+        // Function to send request
+        async function sendRequest(event) {
+            event.preventDefault(); // 防止表单的默认提交行为
+
+            const tool = document.getElementById('tool').value;
+            const ip = document.getElementById('ip').value;
+            const port = document.getElementById('port').value;
+            const output = document.getElementById('output');
+
+            // 构建请求参数
+            const params = new URLSearchParams();
+            params.append('tool', tool);
+            params.append('ip', ip);
+            params.append('port', port);
+            
+            const formDataString = params.toString();
+            const contentLength = formDataString.length;
+
+            console.log('formDataString:', formDataString);
+            console.log('CONTENT_LENGTH:', contentLength);
+
+            try {
+                // 使用 fetch API 发送表单数据
+                const response = await fetch('/CgiTool', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': contentLength.toString()
+            },
+            body: formDataString // 将参数转换为 URL 编码的形式
+        });
+
+                if (response.ok) {
+                    // 获取响应文本
+                    const result = await response.text();
+                    // 显示扫描结果
+                    const report = `Tool: ${tool}<br>IP: ${ip}<br>Port: ${port}<br>Scan result:<br>${result}`;
+
+                    output.innerHTML = report;
+
+                    // 提供保存报告为TXT文件的功能
+                    const blob = new Blob([report], { type: 'text/plain' });
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = 'report.txt';
+                    a.textContent = 'Save report as TXT file';
+                    a.style.display = 'block';
+                    a.style.marginTop = '20px';
+                    output.appendChild(a);
+                } else {
+                    console.error('Network response was not ok.');
+                    output.innerHTML = 'Error: Unable to fetch scan results.';
+                }
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+                output.innerHTML = 'Error: Unable to fetch scan results.';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', setupLanguage); // Set up language when the page loads
+        document.addEventListener('DOMContentLoaded', loadTools); // Load tools from localStorage when the page loads
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="headerText">Penetration Testing Tools Interface</h1>
+            <button class="btn" onclick="switchLanguage('en')">English</button>
+            <button class="btn" onclick="switchLanguage('zh')">中文</button>
+        </div>
+        <div class="main-content">
+            <div class="description">
+                <p id="descriptionText1">Welcome to the penetration testing tool interface. This tool is designed to help you conduct network security testing, identify potential vulnerabilities and weaknesses in the system.</p>
+                <p id="descriptionText2">Usage steps:</p>
+                <ol>
+                    <li id="descriptionText3">Select the tool you want to use from the drop-down menu.</li>
+                    <li id="descriptionText4">Enter the target IP address.</li>
+                    <li id="descriptionText5">Enter the target port.</li>
+                    <li id="descriptionText6">Click the "Send Request" button to start testing.</li>
+                </ol>
+                <p id="descriptionText7">The scan results will be displayed at the bottom of the page, and you can also save the report as a TXT file.</p>
+            </div>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="tool" id="toolText">Select a tool</label>
+                    <select id="tool">
+                        <option value="nmap">Nmap</option>
+                        <option value="nuclei">Nuclei</option>
+                        <!-- Add more tools here -->
+                    </select>
+                </div>
+                <button class="btn" onclick="clearTools()" id="clearText">Clear tool list</button>
+                <div class="form-group">
+                    <label for="ip" id="ipText">IP address</label>
+                    <input type="text" id="ip">
+                </div>
+                <div class="form-group">
+                    <label for="port" id="portText">Port</label>
+                    <input type="text" id="port">
+                </div>
+                <button class="btn" onclick="sendRequest(event)" id="sendText">Send request</button>
+                <button class="btn" onclick="location.href='addtools_bilingual.html'" id="addText">Universal call addition</button>
+            </div>
+        </div>
+        <div class="output-container">
+            <label for="output" id="outputText">Output</label>
+            <br>
+            <div class="output" id="output"></div>
+        </div>
+    </div>
+</body>
+</html>

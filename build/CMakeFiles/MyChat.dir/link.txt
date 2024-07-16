@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wall -g CMakeFiles/MyChat.dir/src/main.cpp.o -o ../out/MyChat 
