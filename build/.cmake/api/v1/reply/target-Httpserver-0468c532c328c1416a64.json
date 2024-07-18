@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/home/agni/Desktop/MyChat/out/MyChat"
+			"path" : "/home/agni/Desktop/httpserver_edit/out/Httpserver"
 		}
 	],
 	"backtrace" : 1,
@@ -42,7 +42,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-Wall -g"
+					"fragment" : "-Wall"
 				},
 				{
 					"fragment" : "-std=gnu++11"
@@ -52,7 +52,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"define" : "SOURCE_ROOT=\"/home/agni/Desktop/MyChat\""
+					"define" : "SOURCE_ROOT=\"/home/agni/Desktop/httpserver_edit\""
 				}
 			],
 			"language" : "CXX",
@@ -70,13 +70,13 @@
 			]
 		}
 	],
-	"id" : "MyChat::@6890427a1f51a3e7e1df",
+	"id" : "Httpserver::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-Wall -g",
+				"fragment" : "-Wall",
 				"role" : "flags"
 			},
 			{
@@ -86,8 +86,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "MyChat",
-	"nameOnDisk" : "MyChat",
+	"name" : "Httpserver",
+	"nameOnDisk" : "Httpserver",
 	"paths" : 
 	{
 		"build" : ".",

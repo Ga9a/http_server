@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/agni/Desktop/httpserver_edit/src/main.cpp" "CMakeFiles/MyChat.dir/src/main.cpp.o" "gcc" "CMakeFiles/MyChat.dir/src/main.cpp.o.d"
+  "/home/agni/Desktop/httpserver_edit/src/main.cpp" "CMakeFiles/Httpserver.dir/src/main.cpp.o" "gcc" "CMakeFiles/Httpserver.dir/src/main.cpp.o.d"
   )
 
 # Targets to which this target links.

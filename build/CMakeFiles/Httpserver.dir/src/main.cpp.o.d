@@ -1,4 +1,4 @@
-CMakeFiles/MyChat.dir/src/main.cpp.o: \
+CMakeFiles/Httpserver.dir/src/main.cpp.o: \
  /home/agni/Desktop/httpserver_edit/src/main.cpp \
  /usr/include/stdc-predef.h \
  /home/agni/Desktop/httpserver_edit/src/../bin/httpserver.hpp \

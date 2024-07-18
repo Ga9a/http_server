@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wall CMakeFiles/Httpserver.dir/src/main.cpp.o -o ../out/Httpserver 

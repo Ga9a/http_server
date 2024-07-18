@@ -1,1 +1,1 @@
-/usr/bin/c++ -Wall -g CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o -o ../out/CgiTool 
+/usr/bin/c++ -Wall CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o -o ../out/CgiTool 

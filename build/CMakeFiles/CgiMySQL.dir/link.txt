@@ -1,1 +1,1 @@
-/usr/bin/c++ -Wall -g CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o -o ../out/CgiMySQL  -L/usr/lib/x86_64-linux-gnu -lmysqlclient -lzstd -lssl -lcrypto -lresolv -lm 
+/usr/bin/c++ -Wall CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o -o ../out/CgiMySQL  -L/usr/lib/x86_64-linux-gnu -lmysqlclient -lzstd -lssl -lcrypto -lresolv -lm 

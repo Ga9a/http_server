@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/agni/Desktop/MyChat/root/cgi/CgiTool.cpp" "CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o" "gcc" "CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o.d"
+  "/home/agni/Desktop/httpserver_edit/root/cgi/CgiTool.cpp" "CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o" "gcc" "CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o.d"
   )
 
 # Targets to which this target links.

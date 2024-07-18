@@ -1,7 +1,7 @@
 CMakeFiles/CgiTool.dir/root/cgi/CgiTool.cpp.o: \
- /home/agni/Desktop/MyChat/root/cgi/CgiTool.cpp \
+ /home/agni/Desktop/httpserver_edit/root/cgi/CgiTool.cpp \
  /usr/include/stdc-predef.h \
- /home/agni/Desktop/MyChat/root/cgi/CgiInclude.hpp \
+ /home/agni/Desktop/httpserver_edit/root/cgi/CgiInclude.hpp \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

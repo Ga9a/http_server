@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/home/agni/Desktop/MyChat/out/CgiTool"
+			"path" : "/home/agni/Desktop/httpserver_edit/out/CgiTool"
 		}
 	],
 	"backtrace" : 1,
@@ -42,7 +42,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-Wall -g"
+					"fragment" : "-Wall"
 				},
 				{
 					"fragment" : "-std=gnu++11"
@@ -52,7 +52,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"define" : "SOURCE_ROOT=\"/home/agni/Desktop/MyChat\""
+					"define" : "SOURCE_ROOT=\"/home/agni/Desktop/httpserver_edit\""
 				}
 			],
 			"language" : "CXX",
@@ -76,7 +76,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-Wall -g",
+				"fragment" : "-Wall",
 				"role" : "flags"
 			},
 			{

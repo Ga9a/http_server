@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/agni/Desktop/MyChat/root/cgi/CgiMySQL.cpp" "CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o" "gcc" "CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o.d"
+  "/home/agni/Desktop/httpserver_edit/root/cgi/CgiMySQL.cpp" "CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o" "gcc" "CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o.d"
   )
 
 # Targets to which this target links.

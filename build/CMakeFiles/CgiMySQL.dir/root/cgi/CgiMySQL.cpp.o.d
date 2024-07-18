@@ -1,7 +1,7 @@
 CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o: \
- /home/agni/Desktop/MyChat/root/cgi/CgiMySQL.cpp \
+ /home/agni/Desktop/httpserver_edit/root/cgi/CgiMySQL.cpp \
  /usr/include/stdc-predef.h \
- /home/agni/Desktop/MyChat/root/cgi/CgiInclude.hpp \
+ /home/agni/Desktop/httpserver_edit/root/cgi/CgiInclude.hpp \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -171,17 +171,17 @@ CMakeFiles/CgiMySQL.dir/root/cgi/CgiMySQL.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql_version.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql_com.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/binary_log_types.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/my_command.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql_time.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/my_list.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql/client_plugin.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql_version.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql_com.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/binary_log_types.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/my_command.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql_time.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/my_list.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql/client_plugin.h \
  /usr/include/c++/11/stdlib.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql/plugin_auth_common.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/typelib.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/my_alloc.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql/psi/psi_memory.h \
- /home/agni/Desktop/MyChat/root/cgi/../../bin/outheader/mysql/psi/psi_base.h
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql/plugin_auth_common.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/typelib.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/my_alloc.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql/psi/psi_memory.h \
+ /home/agni/Desktop/httpserver_edit/root/cgi/../../bin/outheader/mysql/psi/psi_base.h

@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10"
@@ -21,7 +21,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -29,7 +29,7 @@
 					[
 						0
 					],
-					"name" : "MyChat",
+					"name" : "Httpserver",
 					"targetIndexes" : 
 					[
 						0,
@@ -43,22 +43,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "CgiMySQL::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-CgiMySQL-Debug-efa394c50403735c00cc.json",
+					"jsonFile" : "target-CgiMySQL-4549deabc08f80d40491.json",
 					"name" : "CgiMySQL",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "CgiTool::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-CgiTool-Debug-08645ece3f2a628e1fad.json",
+					"jsonFile" : "target-CgiTool-54cdbc613c13119ac258.json",
 					"name" : "CgiTool",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "MyChat::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MyChat-Debug-d1df7d44962bebc57915.json",
-					"name" : "MyChat",
+					"id" : "Httpserver::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Httpserver-0468c532c328c1416a64.json",
+					"name" : "Httpserver",
 					"projectIndex" : 0
 				}
 			]
@@ -67,8 +67,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/agni/Desktop/MyChat/build",
-		"source" : "/home/agni/Desktop/MyChat"
+		"build" : "/home/agni/Desktop/httpserver_edit/build",
+		"source" : "/home/agni/Desktop/httpserver_edit"
 	},
 	"version" : 
 	{

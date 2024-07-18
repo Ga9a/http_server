@@ -125,8 +125,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/agni/Desktop/MyChat/build",
-		"source" : "/home/agni/Desktop/MyChat"
+		"build" : "/home/agni/Desktop/httpserver_edit/build",
+		"source" : "/home/agni/Desktop/httpserver_edit"
 	},
 	"version" : 
 	{

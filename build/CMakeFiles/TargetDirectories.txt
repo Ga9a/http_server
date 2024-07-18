@@ -1,5 +1,5 @@
-/home/agni/Desktop/MyChat/build/CMakeFiles/MyChat.dir
-/home/agni/Desktop/MyChat/build/CMakeFiles/CgiTool.dir
-/home/agni/Desktop/MyChat/build/CMakeFiles/CgiMySQL.dir
-/home/agni/Desktop/MyChat/build/CMakeFiles/edit_cache.dir
-/home/agni/Desktop/MyChat/build/CMakeFiles/rebuild_cache.dir
+/home/agni/Desktop/httpserver_edit/build/CMakeFiles/Httpserver.dir
+/home/agni/Desktop/httpserver_edit/build/CMakeFiles/CgiTool.dir
+/home/agni/Desktop/httpserver_edit/build/CMakeFiles/CgiMySQL.dir
+/home/agni/Desktop/httpserver_edit/build/CMakeFiles/edit_cache.dir
+/home/agni/Desktop/httpserver_edit/build/CMakeFiles/rebuild_cache.dir

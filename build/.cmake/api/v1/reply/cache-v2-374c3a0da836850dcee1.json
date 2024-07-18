@@ -39,11 +39,11 @@
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel ..."
 				}
 			],
 			"type" : "STRING",
-			"value" : "Debug"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/agni/Desktop/MyChat/build"
+			"value" : "/home/agni/Desktop/httpserver_edit/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -519,11 +519,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Enable/Disable output of compile commands during generation."
 				}
 			],
 			"type" : "BOOL",
-			"value" : "TRUE"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_EXTRA_GENERATOR",
@@ -595,7 +595,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/agni/Desktop/MyChat"
+			"value" : "/home/agni/Desktop/httpserver_edit"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -839,7 +839,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "MyChat"
+			"value" : "Httpserver"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1122,6 +1122,42 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "Httpserver_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/agni/Desktop/httpserver_edit/build"
+		},
+		{
+			"name" : "Httpserver_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "Httpserver_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/agni/Desktop/httpserver_edit"
+		},
+		{
 			"name" : "MyChat_BINARY_DIR",
 			"properties" : 
 			[
@@ -1131,7 +1167,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/agni/Desktop/MyChat/build"
+			"value" : "/home/agni/Desktop/httpserver_edit/build"
 		},
 		{
 			"name" : "MyChat_IS_TOP_LEVEL",
@@ -1155,19 +1191,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/agni/Desktop/MyChat"
-		},
-		{
-			"name" : "MySQL_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for MySQL."
-				}
-			],
-			"type" : "PATH",
-			"value" : "MySQL_DIR-NOTFOUND"
+			"value" : "/home/agni/Desktop/httpserver_edit"
 		}
 	],
 	"kind" : "cache",
