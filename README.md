@@ -97,4 +97,4 @@ ip:端口号
 
 目前仅实现Nmap简单ip扫描，向ip地址中输入127.0.0.1，任意端口号查看cgi调用结果：
 
-![image-20240718164050056](C:\Users\agni\Desktop\md_pictrue\image-20240718164050056.png)
+![image-20240718164050056](md_pictrue\image-20240718164050056.png)
