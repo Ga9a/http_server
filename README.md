@@ -63,7 +63,7 @@ mysql> show columns from user
 2 rows in set (0.02 sec)
 ```
 
-![image-20240718162443469](md_pictrue\image-20240718162443469.png)
+![image-20240718162443469](.\md_picture\image-20240718162443469.png)
 
 在build目录下执行命令
 
@@ -85,16 +85,16 @@ ip:端口号
 
 即可打开登录界面：
 
-![image-20240718163620505](md_pictrue\image-20240718163620505.png)
+![image-20240718163620505](.\md_picture\image-20240718163620505.png)
 
 错误登录名/密码提示：
 
-![image-20240718163713616](md_pictrue\image-20240718163713616.png)
+![image-20240718163713616](.\md_picture\image-20240718163713616.png)
 
 使用存入MySQL数据库的用户名登录,进入应用界面:
 
-![image-20240718163853992](md_pictrue\image-20240718163853992.png)
+![image-20240718163853992](.\md_picture\image-20240718163853992.png)
 
 目前仅实现Nmap简单ip扫描，向ip地址中输入127.0.0.1，任意端口号查看cgi调用结果：
 
-![image-20240718164050056](C:\Users\agni\Desktop\md_pictrue\image-20240718164050056.png)
+![image-20240718164050056](.\md_picture\image-20240718164050056.png)
