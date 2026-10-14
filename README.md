@@ -1,100 +1,67 @@
-# 简单的HTTP服务器
+# HTTP Server
 
-## 环境配置
+An educational Linux C++11 HTTP server with a six-worker pthread pool, static file responses, and optional CGI demonstrations. The implementation supports one GET or POST request per connection.
 
-- Ubuntu 22.04.4
-- gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04）
-- cmake version 3.22.1
+## Build and run
 
-## 系统实现
-
-## 快速运行
-
-如下图配置数据库的登陆密码，用户名，新建立数据库，并将名字修改至文件/root/cgi/CgiMySQL.cpp文件中：
-
-```bash
-agni@agni-virtual-machine:~/Desktop/httpserver_edit$ mysql -u root -p
-Enter password: 
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 10
-Server version: 8.0.37-0ubuntu0.22.04.3 (Ubuntu)
-
-Copyright (c) 2000, 2024, Oracle and/or its affiliates.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql> SHOW DATABASES;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-| yourdb             |
-+--------------------+
-5 rows in set (0.11 sec)
-
-mysql> use yourdb;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
-
-Database changed
-mysql> show tables;
-+------------------+
-| Tables_in_yourdb |
-+------------------+
-| user             |
-+------------------+
-1 row in set (0.00 sec)
-
-mysql> show columns from user
-    -> ;
-+----------+----------+------+-----+---------+-------+
-| Field    | Type     | Null | Key | Default | Extra |
-+----------+----------+------+-----+---------+-------+
-| username | char(50) | YES  |     | NULL    |       |
-| passwd   | char(50) | YES  |     | NULL    |       |
-+----------+----------+------+-----+---------+-------+
-2 rows in set (0.02 sec)
+```sh
+sudo apt-get install build-essential cmake
+cmake -S . -B build
+cmake --build build --parallel
+./build/Httpserver 9090
 ```
 
-![image-20240718162443469](md_picture/image-20240718162443469.png)
+Linux is required for the socket and sendfile implementation. Open http://localhost:9090/. CMake copies English pages to `build/wwwroot/` and builds CGI programs there. Paths no longer depend on the launch directory. `build/build.sh` is a convenience wrapper accepting additional CMake options.
 
-在build目录下执行命令
+## Optional MySQL login demonstration
 
-```bash
-sh ./build.sh
+```sh
+sudo apt-get install pkg-config default-libmysqlclient-dev
+cmake -S . -B build -DENABLE_MYSQL_CGI=ON
+cmake --build build --parallel
+export MYSQL_HOST=127.0.0.1
+export MYSQL_USER=webserver
+export MYSQL_PASSWORD='your-local-database-password'
+export MYSQL_DATABASE=webserver
+./build/Httpserver 9090
 ```
 
-进入out目录执行
+Create the database and a `user` table with `username VARCHAR(50)` and `passwd VARCHAR(50)` columns. The demo uses the submitted username, validates query escaping through the MySQL client, fails closed on connection/query errors, and does not print passwords. It stores plaintext passwords for educational compatibility and serves a result page; it has no authenticated session layer. Replace this design with hashed passwords and sessions before implementing real accounts.
 
-```bash
-./Httpserver 9090
+Without `ENABLE_MYSQL_CGI`, the static server and network diagnostics remain usable; the database CGI route is unavailable.
+
+## Network diagnostics
+
+Install Nmap at `/usr/bin/nmap` to use `/penetration.html`. The CGI accepts exactly one IPv4 address and one port from 1 to 65535, invokes Nmap without a shell, and honors the selected port. The page displays output as text, shows request failures, and disables duplicate submissions. Use it only for hosts you are authorized to test.
+
+The previous unsupported tool selector and missing tool-addition page have been removed. Only the implemented Nmap operation is offered.
+
+## Request and process handling
+
+- Request lines are capped at 8 KiB and headers at 100 lines.
+- POST bodies require a numeric Content-Length and are capped at 1 MiB.
+- Accepted sockets have ten-second read/write timeouts.
+- Static paths reject traversal and encoded path tricks.
+- Only `CgiTool` and `CgiMySQL` are executable routes.
+- CGI processes receive isolated pipes and explicit request environment variables through posix_spawn.
+- CGI response waits use a ten-second idle timeout and a 1 MiB output cap.
+- Parent workers wait for their own CGI child and transmit partial socket/file writes correctly.
+
+## Structure
+
+- `src/main.cpp`: validated command-line port.
+- `bin/`: TCP listener, HTTP server, shared includes, and logging.
+- `threadpool/`: workers and per-connection tasks.
+- `httpmsg/`: line reading, request parsing, response building, and CGI handling.
+- `lock/`: pthread synchronization wrappers.
+- `root/`: English static pages and CGI source files.
+
+## Verify
+
+```sh
+python3 tests_smoke.py
 ```
 
-其中9090为端口号，然后打开浏览器输入
+Build before running the smoke checks. They start a local server, verify normal, missing, traversal, invalid-length, and large responses, and reject malformed CGI parameters without scanning a network target. Linux CI builds the server and runs the same checks. MySQL integration additionally requires a configured test database.
 
-```
-ip:端口号
-```
-
-即可打开登录界面：
-
-![image-20240718163620505](md_picture/image-20240718163620505.png)
-
-错误登录名/密码提示：
-
-![image-20240718163713616](md_picture/image-20240718163713616.png)
-
-使用存入MySQL数据库的用户名登录,进入应用界面:
-
-![image-20240718163853992](md_picture/image-20240718163853992.png)
-
-目前仅实现Nmap简单ip扫描，向ip地址中输入127.0.0.1，任意端口号查看cgi调用结果：
-
-![image-20240718164050056.png](md_picture/image-20240718164050056.png)
+This is a learning project, with no TLS, full HTTP/1.1 keep-alive/pipelining, chunked request decoding, or production authentication. The listener binds all interfaces; restrict access appropriately when using the optional diagnostics demo. No benchmark-backed performance claim or explicit project license is currently provided. Retained third-party headers keep their upstream notices.

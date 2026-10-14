@@ -1,5 +1,10 @@
-#pragma once 
+#pragma once
 #include<string>
+#include<cstdlib>
+#include<cctype>
+#include<cerrno>
+#include<csignal>
+#include<ctime>
 #include<vector>
 #include<iostream>
 #include<unordered_map>
