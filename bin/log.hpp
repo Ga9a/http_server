@@ -20,7 +20,7 @@ enum LogLevel
 
 void Log(const string& level,const string& message,const string& filename,long line)
 {
-    //日志格式：[level](filename:line)  message (time)
+
     time_t t;
     time(&t);
     cout << "[" << level << "](" << filename << ":" << line << ") " << message << "\t" << ctime(&t);

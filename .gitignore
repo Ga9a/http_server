@@ -1,0 +1,9 @@
+/build/*
+!/build/build.sh
+/out/
+/root/CgiTool
+/root/CgiMySQL
+*.log
+.env
+.DS_Store
+/md_picture/

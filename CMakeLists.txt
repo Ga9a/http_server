@@ -1,41 +1,38 @@
-cmake_minimum_required(VERSION 3.10)
-
-project(Httpserver)
-
+cmake_minimum_required(VERSION 3.16)
+project(Httpserver LANGUAGES CXX)
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    message(FATAL_ERROR "Httpserver requires Linux (sendfile).")
+endif()
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-Wall")
-
-# 添加可执行文件输出路径
-set(EXECUTABLE_OUTPUT_PATH ../out)
-
-# 源文件列表
-set(SOURCES
-    src/main.cpp
-)
-
-# 头文件列表
-set(HEADERS
-    bin/include.hpp
-    bin/log.hpp
-)
-
-# 获取源代码的根目录
-get_filename_component(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}" ABSOLUTE)
-
-# 将源代码根目录传递给编译器
-add_compile_definitions(SOURCE_ROOT="${SOURCE_ROOT}")
-
-# 添加可执行文件
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
-
-# 添加额外的可执行文件
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(Threads REQUIRED)
+add_executable(Httpserver src/main.cpp)
+target_link_libraries(Httpserver PRIVATE Threads::Threads)
+target_compile_options(Httpserver PRIVATE -Wall -Wextra)
+target_compile_definitions(Httpserver PRIVATE SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}" WEB_ROOT_PATH="${CMAKE_BINARY_DIR}/wwwroot")
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/wwwroot")
+file(GLOB WEB_PAGES "${CMAKE_CURRENT_SOURCE_DIR}/root/*.html")
+foreach(PAGE ${WEB_PAGES})
+    get_filename_component(NAME "${PAGE}" NAME)
+    configure_file("${PAGE}" "${CMAKE_BINARY_DIR}/wwwroot/${NAME}" COPYONLY)
+endforeach()
 add_executable(CgiTool root/cgi/CgiTool.cpp)
-add_executable(CgiMySQL root/cgi/CgiMySQL.cpp)
+set_target_properties(CgiTool PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/wwwroot")
+option(ENABLE_MYSQL_CGI "Build the MySQL login demonstration" OFF)
+if(ENABLE_MYSQL_CGI)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(MYSQL QUIET IMPORTED_TARGET mysqlclient)
+if(NOT MYSQL_FOUND)
+    pkg_check_modules(MYSQL REQUIRED IMPORTED_TARGET libmariadb)
+endif()
+    add_executable(CgiMySQL root/cgi/CgiMySQL.cpp)
+    target_link_libraries(CgiMySQL PRIVATE PkgConfig::MYSQL)
+    target_compile_definitions(CgiMySQL PRIVATE WEB_ROOT_PATH="${CMAKE_BINARY_DIR}/wwwroot")
+    set_target_properties(CgiMySQL PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/wwwroot")
+endif()
 
-# 使用 mysql_config 获取 MySQL 的编译选项
-execute_process(COMMAND mysql_config --cflags OUTPUT_VARIABLE MYSQL_CFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
-execute_process(COMMAND mysql_config --libs OUTPUT_VARIABLE MYSQL_LIBS OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-# 将 MySQL 的编译选项添加到编译器中
-target_compile_options(CgiMySQL PRIVATE ${MYSQL_CFLAGS})
-target_link_libraries(CgiMySQL PRIVATE ${MYSQL_LIBS})
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(CgiFormTests tests/cgi_form_test.cpp)
+    add_test(NAME cgi-form-decoding COMMAND CgiFormTests)
+endif()

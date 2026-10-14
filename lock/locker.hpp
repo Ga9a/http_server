@@ -87,7 +87,7 @@ public:
         int ret = 0;
         //pthread_mutex_lock(&m_mutex);
         ret = pthread_cond_wait(&m_cond, m_mutex);
-        //等待条件变量 cond，在等待之前会释放 mutex 的锁，并在收到信号时重新获取 mutex 的锁。
+
         //pthread_mutex_unlock(&m_mutex);
         return ret == 0;
     }

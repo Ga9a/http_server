@@ -1,110 +1,70 @@
 #pragma once
-
-#include<iostream>
-#include <unordered_map>
 #include <algorithm>
+#include <cerrno>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+#include <string>
+#include <unordered_map>
+#include <unistd.h>
 using std::cout;
 using std::cerr;
 using std::endl;
-
-#include<unistd.h>
-#include<string>
-#include<fstream>
-
-const static size_t INFO = 1;
-const static size_t ERROR = 2;
-
-#define CGILOG(level, str) CgiLog(#level, str)
-
-void CgiLog(const std::string& level, const std::string& message)
-{
-  cerr << "CGI " << level << "==>" << message << endl;
+#define CGILOG(level, message) (std::cerr << "CGI " << #level << ": " << message << '\n')
+inline char* GetMethod() {
+    char* method = std::getenv("METHOD");
+    if (!method) throw std::invalid_argument("Missing CGI method");
+    return method;
 }
-
-// 获取请求方法
-char* GetMethod()
-{
-  char* method = getenv("METHOD"); // 获取请求方法，用来判断如何获取参数
-  if(method == nullptr)
-  {
-    CGILOG(ERROR, "get method env failed");
-    exit(2);
-  }
-  CGILOG(INFO, "get method:" + std::string(method));
-
-  return method;
+inline void GetQueryString(const std::string& method, std::string& query, const std::string& length) {
+    if (method == "GET") {
+        const char* value = std::getenv("QUERY_STRING");
+        query = value ? value : "";
+    } else if (method == "POST") {
+        if (length.empty() || length.find_first_not_of("0123456789") != std::string::npos)
+            throw std::invalid_argument("Invalid CGI content length");
+        std::size_t remaining = std::stoul(length);
+        if (remaining > 1024 * 1024) throw std::invalid_argument("CGI body is too large");
+        char buffer[4096];
+        while (remaining) {
+            const ssize_t count = read(STDIN_FILENO, buffer, std::min(remaining, sizeof(buffer)));
+            if (count < 0 && errno == EINTR) continue;
+            if (count <= 0) throw std::runtime_error("Incomplete CGI body");
+            query.append(buffer, static_cast<std::size_t>(count));
+            remaining -= static_cast<std::size_t>(count);
+        }
+    } else throw std::invalid_argument("Unsupported CGI method");
 }
-
-// 获取参数
-void GetQueryString(const std::string &method, std::string& queryString,std::string content_length)
-{
-  CGILOG(INFO, "GetQueryString function start");
-  // 分两种，一种POST的，一种带参GET的
-  if(method == "GET")
-  { // 从环境变量中获得参数
-    CGILOG(INFO, "method is GET");
-    queryString = getenv("QUERY_STRING");
-  }
-  else if(method == "POST")
-  { // 从管道(0)中获取参数，可以直接用cin，但是可能会有回车啥的，所以就用read
-    CGILOG(INFO, "method is POST");
-    size_t contentLength = std::stoul(content_length);
-    char ch;
-    while(contentLength--)
-    {
-      read(0, &ch, 1); // ---------------------------这里未处理read返回值
-      queryString.push_back(ch);
+inline std::string DecodeForm(const std::string& value) {
+    auto hex = [](char ch) -> int {
+        if (ch >= '0' && ch <= '9') return ch - '0';
+        if (ch >= 'a' && ch <= 'f') return ch - 'a' + 10;
+        if (ch >= 'A' && ch <= 'F') return ch - 'A' + 10;
+        return -1;
+    };
+    std::string result;
+    for (std::size_t i = 0; i < value.size(); ++i) {
+        if (value[i] == '+') result += ' ';
+        else if (value[i] == '%') {
+            if (i + 2 >= value.size() || hex(value[i + 1]) < 0 || hex(value[i + 2]) < 0)
+                throw std::invalid_argument("Invalid form escape");
+            result += static_cast<char>(hex(value[i + 1]) * 16 + hex(value[i + 2]));
+            i += 2;
+        } else result += value[i];
     }
-  }
-  else
-  {
-    CGILOG(ERROR, "unknow method[" + method + ']');
-    exit(3);
-  }
-
-  CGILOG(INFO, "get query string:" + queryString);
+    return result;
 }
-
-// 切分函数
-bool CutString(const std::string& str, const std::string& sep, std::string& leftStr, std::string& rightStr)
-{
-  size_t pos = str.find(sep);
-  if(pos != std::string::npos)
-  {
-    leftStr = str.substr(0, pos);
-    rightStr = str.substr(pos + sep.size());
-  
-    return true;
-  }
-  else
-  {
-    return false;
-  }
-}
-
-//生成KV表
-std::unordered_map<std::string,std::string> KVconstructor(std::string query_string)
-{
-
-   std::unordered_map<std::string,std::string> para;
-    std::string kv, left, right, back = query_string;
-
-    size_t para_count = std::count(query_string.begin(), query_string.end(), '&') + 1;
-
-    for (size_t i = 0; i < para_count-1; ++i) {
-      CutString(query_string, "&", kv, back);
-      CutString(kv, "=", left, right);
-      para.insert({left, right});
-      query_string = back;
+inline std::unordered_map<std::string, std::string> KVconstructor(const std::string& query) {
+    std::unordered_map<std::string, std::string> fields;
+    std::size_t start = 0;
+    while (start < query.size()) {
+        const std::size_t end = query.find('&', start);
+        const std::string pair = query.substr(start, end == std::string::npos ? end : end - start);
+        const std::size_t equals = pair.find('=');
+        if (equals != std::string::npos) fields[DecodeForm(pair.substr(0, equals))] = DecodeForm(pair.substr(equals + 1));
+        if (end == std::string::npos) break;
+        start = end + 1;
     }
-
-      CutString(back, "=", left, right);
-      para.insert({left, right});
-
-
-    //     for (const auto& pair : para) {
-    //     std::cerr << "Key: " << pair.first << ", Value: " << pair.second << std::endl;
-    // }
-
-    return para;
+    return fields;
 }
